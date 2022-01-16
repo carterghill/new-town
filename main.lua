@@ -19,43 +19,43 @@ end
 function love.keypressed(key)
     player:keypressed(key)
     if key == "up" then
-        player2.input.up = true
+        player2.controls.up = true
     end
     if key == "down" then
-        player2.input.down = true
+        player2.controls.down = true
     end
     if key == "left" then
-        player2.input.left = true
+        player2.controls.left = true
     end
     if key == "right" then
-        player2.input.right = true
+        player2.controls.right = true
     end
 end
 
 function love.keyreleased(key)
     if key == "w" then
-        player.input.up = false
+        player.controls.up = false
     end
     if key == "s" then
-        player.input.down = false
+        player.controls.down = false
     end
     if key == "a" then
-        player.input.left = false
+        player.controls.left = false
     end
     if key == "d" then
-        player.input.right = false
+        player.controls.right = false
     end
 
     if key == "up" then
-        player2.input.up = false
+        player2.controls.up = false
     end
     if key == "down" then
-        player2.input.down = false
+        player2.controls.down = false
     end
     if key == "left" then
-        player2.input.left = false
+        player2.controls.left = false
     end
     if key == "right" then
-        player2.input.right = false
+        player2.controls.right = false
     end
 end

@@ -1,4 +1,4 @@
-require('Input')
+require('Controls')
 
 Player = {
     x = 0;
@@ -7,20 +7,20 @@ Player = {
     dy = 0;
     width = 64;
     height = 64;
-    input = Input:new()
+    controls = Controls:new()
 }
 
 function Player:new(x, y)
     local s = setmetatable( {Player}, { __index = self } )
     s.x = x or 0
     s.y = y or 0
-    s.input = Input:new()
+    s.controls = Controls:new()
     return s;
 end
 
 function Player:update(dt)
     
-    if self.input.up then
+    if self.controls.up then
         self.dy = self.dy + 1
     elseif self.dy > 0 then
         if self.dy < 1 then
@@ -30,7 +30,7 @@ function Player:update(dt)
         end
     end
 
-    if self.input.down then
+    if self.controls.down then
         self.dy = self.dy - 1
     elseif self.dy < 0 then
         if self.dy > -1 then
@@ -40,7 +40,7 @@ function Player:update(dt)
         end
     end
 
-    if self.input.left then
+    if self.controls.left then
         self.dx = self.dx - 1
     elseif self.dx < 0 then
         if self.dx > -1 then
@@ -50,7 +50,7 @@ function Player:update(dt)
         end
     end
 
-    if self.input.right then
+    if self.controls.right then
         self.dx = self.dx + 1
     elseif self.dx > 0 then
         if self.dx < 1 then
@@ -67,16 +67,16 @@ end
 
 function Player:keypressed(key)
     if key == "w" then
-        self.input.up = true
+        self.controls.up = true
     end
     if key == "s" then
-        self.input.down = true
+        self.controls.down = true
     end
     if key == "a" then
-        self.input.left = true
+        self.controls.left = true
     end
     if key == "d" then
-        self.input.right = true
+        self.controls.right = true
     end
 end
 
