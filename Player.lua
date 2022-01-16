@@ -12,10 +12,8 @@ Player = {
 
 function Player:new(x, y)
     local s = setmetatable( {Player}, { __index = self } )
-    s.x = x
-    s.y = y 
-    s.dx = 0
-    s.dy = 0 
+    s.x = x or 0
+    s.y = y or 0
     s.input = Input:new()
     return s;
 end
