@@ -1,4 +1,5 @@
 require('Controls')
+require('Input')
 
 Player = {
     x = 0;
@@ -7,7 +8,8 @@ Player = {
     dy = 0;
     width = 64;
     height = 64;
-    controls = Controls:new()
+    controls = Controls:new(),
+    input = Input:new(Keyboard:new())
 }
 
 function Player:new(x, y)
@@ -66,17 +68,33 @@ function Player:update(dt)
 end
 
 function Player:keypressed(key)
-    if key == "w" then
+    local keyboard = self.input.keyboard
+    if key == keyboard.up then
         self.controls.up = true
     end
-    if key == "s" then
+    if key == keyboard.down then
         self.controls.down = true
     end
-    if key == "a" then
+    if key == keyboard.left then
         self.controls.left = true
     end
-    if key == "d" then
+    if key == keyboard.right then
         self.controls.right = true
     end
 end
 
+function Player:keyreleased(key)
+    local keyboard = self.input.keyboard
+    if key == keyboard.up then
+        self.controls.up = false
+    end
+    if key == keyboard.down then
+        self.controls.down = false
+    end
+    if key == keyboard.left then
+        self.controls.left = false
+    end
+    if key == keyboard.right then
+        self.controls.right = false
+    end
+end
