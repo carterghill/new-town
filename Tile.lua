@@ -1,3 +1,5 @@
+require('Camera')
+
 Tile = {}
 
 function Tile:new(img)
@@ -7,6 +9,6 @@ function Tile:new(img)
     return t
 end
 
-function Tile:draw()
-    --love.graphics.draw
+function Tile:draw(x, y)
+    love.graphics.draw(self.img, x - Camera.x, y - Camera.y, 0, self.scale)
 end
