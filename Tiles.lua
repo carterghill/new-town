@@ -15,9 +15,6 @@ function Tiles:load()
     for i, file in ipairs(files) do
         self.tilled[#self.tilled] = love.graphics.newImage('assets/Tilesets/Tilled/'..file)
     end
-
-    
-
 end
 
 function Tiles:draw()
