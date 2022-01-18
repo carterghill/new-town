@@ -1,11 +1,14 @@
 require("Player")
+require("Tiles")
 
 function love.load()
+    Tiles:load()
     player = Player:new()
     player2 = Player:new(50, 50)
 end
 
 function love.draw()
+    Tiles:draw()
     --love.graphics.print("Hello World!!", player.x, player.y)
     love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x, player2.y, player2.width, player2.height)
