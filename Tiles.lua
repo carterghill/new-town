@@ -1,9 +1,12 @@
+require('Tile')
+
 Tiles = {
     dirt = {},
     tilled = {}
 }
 
 function Tiles:load()
+    Tile:new('assets/Tilesets/Dirt/Dirt_01.png')
     local files = love.filesystem.getDirectoryItems('assets/Tilesets/Dirt')
     for i, file in ipairs(files) do
         self.dirt[#self.dirt] = love.graphics.newImage('assets/Tilesets/Dirt/'..file)
