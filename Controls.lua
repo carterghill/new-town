@@ -6,6 +6,6 @@ Controls = {
 }
 
 function Controls:new()
-    local i = setmetatable( {Controls}, { __index = self } )
-    return i
+    local c = setmetatable( {Controls}, { __index = self } )
+    return c
 end

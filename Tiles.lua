@@ -16,6 +16,8 @@ end
 
 function Tiles:draw()
     love.graphics.draw(self.dirt[0], 0, 0, 0, 0.25)
+    love.graphics.draw(self.dirt[0], 0, 128, 0, 0.25)
+    love.graphics.draw(self.dirt[0], 0, 256, 0, 0.25)
     love.graphics.draw(self.dirt[0], 128, 0, 0, 0.25)
     love.graphics.draw(self.dirt[0], 256, 0, 0, 0.25)
     love.graphics.draw(self.dirt[0], 256+128, 0, 0, 0.25)

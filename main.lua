@@ -1,4 +1,5 @@
 require("Player")
+require("Camera")
 require("Tiles")
 
 function love.load()
@@ -10,13 +11,15 @@ end
 function love.draw()
     Tiles:draw()
     --love.graphics.print("Hello World!!", player.x, player.y)
-    love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
+    love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x, player2.y, player2.width, player2.height)
 end
 
 function love.update(dt)
     player:update(dt)
     player2:update(dt)
+    Camera:update(dt)
+    Camera:follow(player, 0.2)
 end
 
 function love.keypressed(key)
