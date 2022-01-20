@@ -83,14 +83,11 @@ function Player:update(dt)
 end
 
 function Player:normalize()
-    --if self.dx ~= 0 and self.dy ~= 0 then
-        local mag = math.sqrt(self.dx*self.dx + self.dy*self.dy)
-        if mag ~= 0 then
-            self.dx = (self.dx/mag)
-            self.dy = (self.dy/mag)
-        end
-        print(self.dx..", "..self.dy)
-    --end
+    local mag = math.sqrt(self.dx*self.dx + self.dy*self.dy)
+    if mag ~= 0 then
+        self.dx = (self.dx/mag)
+        self.dy = (self.dy/mag)
+    end
 end
 
 function Player:keypressed(key)
