@@ -76,9 +76,21 @@ function Player:update(dt)
         self.dy = -self.topSpeed
     end
 
-    self.x = self.x + self.dx*dt
-    self.y = self.y - self.dy*dt
+    self:normalize()
+    self.x = self.x + self.dx*self.topSpeed*dt
+    self.y = self.y - self.dy*self.topSpeed*dt
 
+end
+
+function Player:normalize()
+    --if self.dx ~= 0 and self.dy ~= 0 then
+        local mag = math.sqrt(self.dx*self.dx + self.dy*self.dy)
+        if mag ~= 0 then
+            self.dx = (self.dx/mag)
+            self.dy = (self.dy/mag)
+        end
+        print(self.dx..", "..self.dy)
+    --end
 end
 
 function Player:keypressed(key)
