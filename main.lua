@@ -6,6 +6,7 @@ function love.load()
     Tiles:load()
     player = Player:new()
     player2 = Player:new(50, 50)
+    Camera:follow(player, 0.2)
 end
 
 function love.draw()
@@ -19,11 +20,9 @@ function love.update(dt)
     player:update(dt)
     player2:update(dt)
     Camera:update(dt)
-    Camera:follow(player, 0.2)
 end
 
 function love.keypressed(key)
-    print(key)
     player:keypressed(key)
     if key == "up" then
         player2.controls.up = true
