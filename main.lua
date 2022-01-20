@@ -23,6 +23,7 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
+    print(key)
     player:keypressed(key)
     if key == "up" then
         player2.controls.up = true
@@ -35,6 +36,9 @@ function love.keypressed(key)
     end
     if key == "right" then
         player2.controls.right = true
+    end
+    if key =="escape" then
+        love.event.quit()
     end
 end
 
