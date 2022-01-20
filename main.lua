@@ -6,7 +6,7 @@ function love.load()
     Tiles:load()
     player = Player:new()
     player2 = Player:new(50, 50)
-    Camera:follow(player, 0.2)
+    Camera:lockOn(player)
 end
 
 function love.draw()

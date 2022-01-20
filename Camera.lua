@@ -4,7 +4,8 @@ Camera = {
     dx = 0,
     dy = 0,
     followObj = nil,
-    followTime = 1
+    followTime = 1,
+    lockObj = nil
 }
 
 function Camera:new()
@@ -14,27 +15,42 @@ end
 
 function Camera:update(dt)
 
+    local w = love.graphics.getWidth()
+    local h = love.graphics.getHeight()
+
     if self.followObj ~= nil then
         local obj = self.followObj
         local time = self.followTime
-        local w = love.graphics.getWidth()
-        local h = love.graphics.getHeight()
         if (obj.dx ~= nil) then
             w = w - obj.dx*obj.topSpeed*0.75
         end
         if (obj.dy ~= nil) then
             h = h + obj.dy*obj.topSpeed*0.75
         end
-        Camera.dx = (((obj.x + obj.width/2) - w/2) - Camera.x)/time
-        Camera.dy = (((obj.y + obj.height) - h/2) - Camera.y)/time
+        self.dx = (((obj.x + obj.width/2) - w/2) - self.x)/time
+        self.dy = (((obj.y + obj.height) - h/2) - self.y)/time
     end
 
-    Camera.x = Camera.x + Camera.dx*dt
-    Camera.y = Camera.y + Camera.dy*dt
+    if self.lockObj ~= nil then
+        self.dx = 0
+        self.dy = 0
+        self.x = self.lockObj.x + self.lockObj.width/2 - w/2
+        self.y = self.lockObj.y + self.lockObj.height - h/2
+    end
+
+    self.x = self.x + self.dx*dt
+    self.y = self.y + self.dy*dt
 
 end
 
 function Camera:follow(obj, time)
     self.followObj = obj
     self.followTime = time
+    self.lockObj = nil
+end
+
+function Camera:lockOn(obj)
+    self.followObj = nil
+    self.followTime = 1
+    self.lockObj = obj
 end
