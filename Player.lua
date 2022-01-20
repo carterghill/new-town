@@ -6,6 +6,8 @@ Player = {
     y = 0;
     dx = 0;
     dy = 0;
+    vx = 0;
+    vy = 0;
     width = 64;
     height = 64;
     accel = 750;
@@ -26,67 +28,75 @@ end
 function Player:update(dt)
     
     if self.controls.up then
-        self.dy = self.dy + self.accel*dt
-    elseif self.dy > 0 then
-        if self.dy < self.friction*dt then
-            self.dy = 0
+        self.vy = self.vy + self.accel*dt
+    elseif self.vy > 0 then
+        if self.vy < self.friction*dt then
+            self.vy = 0
         else 
-            self.dy = self.dy - self.friction*dt
+            self.vy = self.vy - self.friction*dt
         end
     end
 
     if self.controls.down then
-        self.dy = self.dy - self.accel*dt
-    elseif self.dy < 0 then
-        if self.dy > -self.friction*dt then
-            self.dy = 0
+        self.vy = self.vy - self.accel*dt
+    elseif self.vy < 0 then
+        if self.vy > -self.friction*dt then
+            self.vy = 0
         else 
-            self.dy = self.dy + self.friction*dt
+            self.vy = self.vy + self.friction*dt
         end
     end
 
     if self.controls.left then
-        self.dx = self.dx - self.accel*dt
-    elseif self.dx < 0 then
-        if self.dx > -self.friction*dt then
-            self.dx = 0
+        self.vx = self.vx - self.accel*dt
+    elseif self.vx < 0 then
+        if self.vx > -self.friction*dt then
+            self.vx = 0
         else 
-            self.dx = self.dx + self.friction*dt
+            self.vx = self.dx + self.friction*dt
         end
     end
 
     if self.controls.right then
-        self.dx = self.dx + self.accel*dt
-    elseif self.dx > 0 then
-        if self.dx < self.friction*dt then
-            self.dx = 0
+        self.vx = self.vx + self.accel*dt
+    elseif self.vx > 0 then
+        if self.vx < self.friction*dt then
+            self.vx = 0
         else 
-            self.dx = self.dx - self.friction*dt
+            self.vx = self.vx - self.friction*dt
         end
     end
 
-    if self.dx > self.topSpeed then
-        self.dx = self.topSpeed
-    elseif self.dx < -self.topSpeed then
-        self.dx = -self.topSpeed
+    if self.vx > self.topSpeed then
+        self.vx = self.topSpeed
+    elseif self.vx < -self.topSpeed then
+        self.vx = -self.topSpeed
     end
-    if self.dy > self.topSpeed then
-        self.dy = self.topSpeed
-    elseif self.dy < -self.topSpeed then
-        self.dy = -self.topSpeed
+    if self.vy > self.topSpeed then
+        self.vy = self.topSpeed
+    elseif self.vy < -self.topSpeed then
+        self.vy = -self.topSpeed
     end
 
     self:normalize()
-    self.x = self.x + self.dx*self.topSpeed*dt
-    self.y = self.y - self.dy*self.topSpeed*dt
+    self.x = self.x + self.dx*dt
+    self.y = self.y - self.dy*dt
 
 end
 
 function Player:normalize()
-    local mag = math.sqrt(self.dx*self.dx + self.dy*self.dy)
+    local mag = math.sqrt(self.vx*self.vx + self.vy*self.vy)
     if mag ~= 0 then
-        self.dx = (self.dx/mag)
-        self.dy = (self.dy/mag)
+        if self.vx < 0 then
+            self.dx = -self.vx*(self.vx/mag)
+        else
+            self.dx = self.vx*(self.vx/mag)   
+        end
+        if self.vy < 0 then
+            self.dy = -self.vy*(self.vy/mag)
+        else
+            self.dy = self.vy*(self.vy/mag)   
+        end
     end
 end
 
