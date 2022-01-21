@@ -6,19 +6,18 @@ function love.load()
     Tiles:load()
     player = Player:new()
     player2 = Player:new(50, 50)
-    Camera:lockOn(player)
+    Camera:follow(player, 0.2)
 end
 
 function love.draw()
     Tiles:draw()
-    --love.graphics.print("Hello World!!", player.x, player.y)
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
-    --love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
+    love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
 end
 
 function love.update(dt)
     player:update(dt)
-    --player2:update(dt)
+    player2:update(dt)
     Camera:update(dt)
 end
 

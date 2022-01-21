@@ -22,10 +22,10 @@ function Camera:update(dt)
         local obj = self.followObj
         local time = self.followTime
         if (obj.dx ~= nil) then
-            w = w - obj.dx*obj.topSpeed*0.75
+            w = w - obj.dx*0.6
         end
         if (obj.dy ~= nil) then
-            h = h + obj.dy*obj.topSpeed*0.75
+            h = h + obj.dy*0.6
         end
         self.dx = (((obj.x + obj.width/2) - w/2) - self.x)/time
         self.dy = (((obj.y + obj.height) - h/2) - self.y)/time

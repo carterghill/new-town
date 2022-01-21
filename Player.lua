@@ -10,9 +10,9 @@ Player = {
     vy = 0;
     width = 64;
     height = 64;
-    accel = 750;
-    friction = 750;
-    topSpeed = 250;
+    accel = 1000;
+    friction = 1000;
+    topSpeed = 300;
     controls = Controls:new(),
     input = Input:new(Keyboard:new())
 }
@@ -30,7 +30,7 @@ function Player:update(dt)
     if self.controls.up then
         self.vy = self.vy + self.accel*dt
     elseif self.vy > 0 then
-        if self.dy < self.friction*dt then
+        if self.vy < self.friction*dt then
             self.vy = 0
         else 
             self.vy = self.vy - self.friction*dt
@@ -40,7 +40,7 @@ function Player:update(dt)
     if self.controls.down then
         self.vy = self.vy - self.accel*dt
     elseif self.vy < 0 then
-        if self.dy > -self.friction*dt then
+        if self.vy > -self.friction*dt then
             self.vy = 0
         else 
             self.vy = self.vy + self.friction*dt
@@ -50,10 +50,10 @@ function Player:update(dt)
     if self.controls.left then
         self.vx = self.vx - self.accel*dt
     elseif self.vx < 0 then
-        if self.dx > -self.friction*dt then
+        if self.vx > -self.friction*dt then
             self.vx = 0
         else 
-            self.vx = self.dx + self.friction*dt
+            self.vx = self.vx + self.friction*dt
         end
     end
 
@@ -77,7 +77,6 @@ function Player:update(dt)
     elseif self.vy < -self.topSpeed then
         self.vy = -self.topSpeed
     end
-
 
     self:normalize()
     self.x = self.x + self.dx*dt
