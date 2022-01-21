@@ -1,4 +1,4 @@
-require('Tile')
+require('src/Tile')
 
 Tiles = {
     dirt = {},

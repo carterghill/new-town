@@ -1,4 +1,4 @@
-require('Camera')
+require('src/Camera')
 
 Tile = {}
 

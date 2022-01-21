@@ -1,6 +1,6 @@
-require("Player")
-require("Camera")
-require("Tiles")
+require("src/Player")
+require("src/Camera")
+require("src/Tiles")
 
 function love.load()
     Tiles:load()

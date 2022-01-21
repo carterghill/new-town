@@ -1,5 +1,5 @@
-require('Controls')
-require('Input')
+require('src/Controls')
+require('src/Input')
 
 Player = {
     x = 0;
