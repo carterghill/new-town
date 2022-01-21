@@ -30,7 +30,7 @@ function Player:update(dt)
     if self.controls.up then
         self.vy = self.vy + self.accel*dt
     elseif self.vy > 0 then
-        if self.vy < self.friction*dt then
+        if self.dy < self.friction*dt then
             self.vy = 0
         else 
             self.vy = self.vy - self.friction*dt
@@ -40,7 +40,7 @@ function Player:update(dt)
     if self.controls.down then
         self.vy = self.vy - self.accel*dt
     elseif self.vy < 0 then
-        if self.vy > -self.friction*dt then
+        if self.dy > -self.friction*dt then
             self.vy = 0
         else 
             self.vy = self.vy + self.friction*dt
@@ -50,7 +50,7 @@ function Player:update(dt)
     if self.controls.left then
         self.vx = self.vx - self.accel*dt
     elseif self.vx < 0 then
-        if self.vx > -self.friction*dt then
+        if self.dx > -self.friction*dt then
             self.vx = 0
         else 
             self.vx = self.dx + self.friction*dt
@@ -60,7 +60,7 @@ function Player:update(dt)
     if self.controls.right then
         self.vx = self.vx + self.accel*dt
     elseif self.vx > 0 then
-        if self.vx < self.friction*dt then
+        if self.dx < self.friction*dt then
             self.vx = 0
         else 
             self.vx = self.vx - self.friction*dt
@@ -77,6 +77,7 @@ function Player:update(dt)
     elseif self.vy < -self.topSpeed then
         self.vy = -self.topSpeed
     end
+
 
     self:normalize()
     self.x = self.x + self.dx*dt
@@ -97,6 +98,9 @@ function Player:normalize()
         else
             self.dy = self.vy*(self.vy/mag)   
         end
+    else
+       self.dx = 0
+       self.dy = 0 
     end
 end
 
