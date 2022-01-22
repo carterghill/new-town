@@ -1,16 +1,19 @@
 require("src/Player")
 require("src/Camera")
+require("src/Tileset")
 require("src/Tiles")
 
 function love.load()
     Tiles:load()
+    forest = Tileset:new("assets/Tilesets/tileset.png")
     player = Player:new()
     player2 = Player:new(50, 50)
     Camera:follow(player, 0.2)
 end
 
 function love.draw()
-    Tiles:draw()
+    --Tiles:draw()
+    forest:draw()
     love.graphics.print(love.timer.getFPS())
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
@@ -20,6 +23,7 @@ function love.update(dt)
     player:update(dt)
     player2:update(dt)
     Camera:update(dt)
+    forest:update()
 end
 
 function love.keypressed(key)
