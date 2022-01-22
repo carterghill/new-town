@@ -24,7 +24,7 @@ function Tileset:new(image)
 
     tilesetImage = love.graphics.newImage( image ) 
     -- this "linear filter" removes some artifacts if we were to scale the tiles
-    tilesetImage:setFilter("nearest", "linear") 
+    tilesetImage:setFilter("nearest") 
     tileSize = 32
     
     -- grass
