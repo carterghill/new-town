@@ -21,12 +21,12 @@ function Tileset:new(image)
     tilesDisplayWidth = 26
     tilesDisplayHeight = 20
     
-    zoomX = 1
-    zoomY = 1
+    zoomX = 2
+    zoomY = 2
 
     tilesetImage = love.graphics.newImage( image ) 
     -- this "linear filter" removes some artifacts if we were to scale the tiles
-    tilesetImage:setFilter("nearest", "linear") 
+    --tilesetImage:setFilter("nearest", "linear") 
     tileSize = 32
     
     -- grass
@@ -49,7 +49,8 @@ function Tileset:new(image)
 end 
 
 function Tileset:draw()
-    love.graphics.draw(self.batch, -Camera.x, -Camera.y)
+    love.graphics.draw(self.batch, math.floor(-zoomX*(mapX%1)*tileSize - Camera.x), math.floor(-zoomY*(mapY%1)*tileSize - Camera.y),
+    0, zoomX, zoomY)
 end
 
 function Tileset:update()
