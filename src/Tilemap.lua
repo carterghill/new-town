@@ -22,11 +22,11 @@ function Tilemap:new(file)
     local map = {}
     for i, v in ipairs(t.file.layers[1].data) do
         print(i..": "..v)
-        print((i%w)..", "..math.floor(i/w)+1)
-        if map[i%w] == nil then
-            map[i%w] = {}
+        print(((i-1)%w + 1)..", "..math.floor((i-1)/w)+1)
+        if map[(i-1)%w + 1] == nil then
+            map[(i-1)%w + 1] = {}
         end
-        map[i%w][math.floor(i/(w))+1] = v
+        map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
     end 
   
     map = {}
