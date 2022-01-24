@@ -15,7 +15,7 @@ return {
     {
       name = "Forest",
       firstgid = 1,
-      filename = "ForestSet.lua"
+      filename = "assets/Maps/ForestSet.lua"
     }
   },
   layers = {

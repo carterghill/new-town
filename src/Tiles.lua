@@ -10,7 +10,6 @@ function Tiles:load()
     Dirt = Tile:new(dirtimg)
     for i = -25, 25, 1 do
         for j = -25, 25, 1 do
-            print(#self.dirt)
             self.dirt[#self.dirt+1] = Tile:new(dirtimg, i*256, j*256, 256)
         end
     end

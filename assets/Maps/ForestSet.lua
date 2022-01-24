@@ -8,7 +8,7 @@ return {
   spacing = 0,
   margin = 0,
   columns = 16,
-  image = "../Tilesets/tileset.png",
+  image = "assets/Tilesets/tileset.png",
   imagewidth = 512,
   imageheight = 512,
   objectalignment = "unspecified",
