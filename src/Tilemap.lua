@@ -12,16 +12,19 @@ function Tilemap:new(file)
     local tileset = love.filesystem.load(t.file.tilesets[1].filename)()
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
+    t.images[#t.images]:setFilter("nearest") 
 
     local imageWidth = t.images[#t.images]:getWidth()
     local imageHeight = t.images[#t.images]:getHeight()
     local tileSize = 32
-    print(imageWidth)
     local quads = {}
     for i = 1, (imageWidth*imageHeight)/32, 1 do
         quads[i] = love.graphics.newQuad((i-1)%imageWidth * tileSize, 
-            math.floor((i-1)/(imageWidth))+1 * tileSize, tileSize, tileSize,
+            math.floor((i-1)/(imageWidth)) * tileSize, tileSize, tileSize,
             t.images[#t.images]:getWidth(), t.images[#t.images]:getHeight())
+
+        print((i-1)%imageWidth)
+        print("("..((i-1)%imageWidth) * tileSize..", "..math.floor((i-1)/(imageWidth)) * tileSize..")")
     end
 
     local w = t.file.width
@@ -53,6 +56,7 @@ function Tilemap:update()
     self.batch:clear()
     for x=0, self.mapWidth-1 do
       for y=0, self.mapHeight-1 do
+        --print("("..x+mapX..", "..y+mapY.."): "..self.map[x+mapX][y+mapY])
         self.batch:add(self.quads[self.map[x+mapX][y+mapY]], x*32, y*32)
       end
     end
