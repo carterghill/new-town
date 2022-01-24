@@ -34,6 +34,18 @@ function Tilemap:new(file)
     t.quads = quads
     t.imageWidth = imageWidth
     t.imageHeight = imageHeight
+    t.layers = {}
+
+    for index, layer in ipairs(t.file.layers) do
+        local map = {}
+        for i, v in ipairs(layer.data) do
+            if map[(i-1)%w + 1] == nil then
+                map[(i-1)%w + 1] = {}
+            end
+            map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
+        end
+        t.layers[index] = map
+    end
 
     local map = {}
     for i, v in ipairs(t.file.layers[1].data) do
@@ -50,12 +62,18 @@ end
 function Tilemap:update()
     local mapX = 1
     local mapY = 1
+    print("Layer size: "..#self.layers)
     self.batch:clear()
-    for x=0, self.mapWidth-1 do
-      for y=0, self.mapHeight-1 do
-        --print("("..x+mapX..", "..y+mapY.."): "..self.map[x+mapX][y+mapY])
-        self.batch:add(self.quads[self.map[x+mapX][y+mapY]], x*32, y*32)
-      end
+    for index, layer in ipairs(self.layers) do
+        print("Layer index: "..index)
+        for x=0, self.mapWidth-1 do
+            for y=0, self.mapHeight-1 do
+              --print("("..x+mapX..", "..y+mapY.."): "..self.map[x+mapX][y+mapY])
+              if layer[x+mapX][y+mapY] ~= 0 then
+                self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*32, y*32)
+              end
+            end
+        end
     end
     self.batch:flush()
 end
