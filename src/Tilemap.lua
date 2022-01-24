@@ -8,13 +8,12 @@ function Tilemap:new(file)
     print(file)
     t.file = love.filesystem.load(file)()
 
-    print(t.file.width)
-    print(t.file.tilesets[1].filename)
     local tileset = love.filesystem.load(t.file.tilesets[1].filename)()
-    print(tileset.image)
-    print(t.file.width)
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
+
+    local imageWidth = t.images[#t.images]:getWidth()
+    print(imageWidth)
 
     local w = t.file.width
     local h = t.file.height
@@ -27,16 +26,7 @@ function Tilemap:new(file)
             map[(i-1)%w + 1] = {}
         end
         map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
-    end 
-  
-    map = {}
-    for x=1,w do
-        map[x] = {}
-        for y=1,h do
-            map[x][y] = love.math.random(0,3)
-        end
     end
-    
 
     return t
 end
