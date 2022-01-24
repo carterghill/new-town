@@ -1,10 +1,12 @@
 require("src/Player")
 require("src/Camera")
 require("src/Tileset")
+require("src/Tilemap")
 require("src/Tiles")
 
 function love.load()
     Tiles:load()
+    Tilemap:new("assets/Maps/starter.lua")
     forest = Tileset:new("assets/Tilesets/tileset.png")
     player = Player:new()
     player2 = Player:new(50, 50)
@@ -13,7 +15,7 @@ end
 
 function love.draw()
     --Tiles:draw()
-    forest:draw()
+    --forest:draw()
     love.graphics.print(love.timer.getFPS())
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
