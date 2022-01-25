@@ -57,7 +57,6 @@ function Tilemap:new(file)
         if layer.name ~= "Collision" then
             t.layers[index] = map
         else
-            print("collision mapped")
             t.collision = map
         end
     end

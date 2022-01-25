@@ -8,8 +8,8 @@ Player = {
     dy = 0;
     vx = 0;
     vy = 0;
-    width = 64;
-    height = 64;
+    width = 48;
+    height = 48;
     accel = 1000;
     friction = 1000;
     topSpeed = 300;
@@ -78,10 +78,6 @@ function Player:update(dt, level)
         self.vy = -self.topSpeed
     end
 
-    self:normalize()
-    self.x = self.x + self.dx*dt
-    self.y = self.y - self.dy*dt
-
     if level ~= nil then
         if self.x < 0 then
             self.x = 0
@@ -93,7 +89,50 @@ function Player:update(dt, level)
         elseif self.y + self.height > level.height then
             self.y = level.height - self.height
         end
+
+        -- Level collision
+        if level.collision ~= nil then
+            if self.dx < 0 then
+                local tile1 = level:getCollisionTile(self.x, self.y + 2)
+                local tile2 = level:getCollisionTile(self.x, self.y + self.height - 2)
+                if tile1 ~= 0 or tile2 ~= 0 then
+                    self.dx = 0
+                    local w = level.tileWidth*level.zx
+                    self.x = math.floor(self.x/w)*w + w
+                end
+            elseif self.dx > 0 then
+                local tile1 = level:getCollisionTile(self.x+self.width, self.y + 2)
+                local tile2 = level:getCollisionTile(self.x+self.width, self.y + self.height - 2)
+                if tile1 ~= 0 or tile2 ~= 0 then
+                    self.dx = 0
+                    local w = level.tileWidth*level.zx
+                    self.x = math.floor(self.x/w)*w + (w-self.width)
+                end
+            end
+            if self.dy < 0 then
+                local tile1 = level:getCollisionTile(self.x+self.width -2, self.y + self.height)
+                local tile2 = level:getCollisionTile(self.x+2, self.y + self.height)
+                if tile1 ~= 0 or tile2 ~= 0 then
+                    self.dy = 0
+                    local h = level.tileHeight*level.zy
+                    self.y = math.floor(self.y/h)*h + (h-self.height)
+                end
+            elseif self.dy > 0 then
+                local tile1 = level:getCollisionTile(self.x+self.width-2, self.y)
+                local tile2 = level:getCollisionTile(self.x+2, self.y)
+                if tile1 ~= 0 or tile2 ~= 0 then
+                    self.dy = 0
+                    local h = level.tileHeight*level.zy
+                    self.y = math.floor(self.y/h)*h + h
+                end
+            end
+        end
+
     end
+
+    self:normalize()
+    self.x = self.x + self.dx*dt
+    self.y = self.y - self.dy*dt
 
 end
 
