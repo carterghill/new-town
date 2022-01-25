@@ -10,10 +10,7 @@ Tilemap = {
 function Tilemap:new(file)
     local t = setmetatable( { Tilemap }, { __index = self } )
 
-    print(file)
     t.file = love.filesystem.load(file)()
-    print(t.file.tilesets[1].filename)
-
     local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].filename)()
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
@@ -73,14 +70,10 @@ end
 function Tilemap:update()
     local mapX = 1
     local mapY = 1
-    print("Layer size: "..#self.layers)
     self.batch:clear()
     for index, layer in ipairs(self.layers) do
-        print("Layer index: "..index)
         for x=0, self.mapWidth-1 do
-            --print(x)
             for y=0, self.mapHeight-1 do
-              --print("("..x+mapX..", "..y+mapY.."): "..self.map[x+mapX][y+mapY])
               if layer[x+mapX][y+mapY] ~= 0 then
                 self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*32, y*32)
               end
