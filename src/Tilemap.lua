@@ -32,12 +32,14 @@ function Tilemap:new(file)
     t.mapHeight = h
     t.tileWidth = t.file.tilewidth
     t.tileHeight = t.file.tileheight
-    t.zx = 0.5
-    t.zy = 0.5
+    t.zx = 64/tileSize
+    t.zy = 64/tileSize
     t.width = w * t.tileWidth * t.zx
     t.height = h * t.tileHeight * t.zy
 
     t.batch = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
+    t.batchLower = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
+    t.batchHigher = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
 
     t.quads = quads
     t.imageWidth = imageWidth
@@ -76,11 +78,26 @@ function Tilemap:update()
             for y=0, self.mapHeight-1 do
               if layer[x+mapX][y+mapY] ~= 0 then
                 self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
+                if index > 2 then
+                    self.batchHigher:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
+                else
+                    self.batchLower:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
+                end
               end
             end
         end
     end
     self.batch:flush()
+end
+
+function Tilemap:drawHigher()
+    love.graphics.draw(self.batchHigher, math.floor(-Camera.x), math.floor(-Camera.y),
+    0, self.zx, self.zy)
+end
+
+function Tilemap:drawLower()
+    love.graphics.draw(self.batchLower, math.floor(-Camera.x), math.floor(-Camera.y),
+    0, self.zx, self.zy)
 end
 
 function Tilemap:draw()

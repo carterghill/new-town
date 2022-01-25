@@ -18,10 +18,11 @@ end
 function love.draw()
     --Tiles:draw()
     --forest:draw()
-    t:draw()
-    love.graphics.print(love.timer.getFPS())
+    t:drawLower()
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
+    t:drawHigher()
+    love.graphics.print(love.timer.getFPS())
 end
 
 function love.update(dt)
