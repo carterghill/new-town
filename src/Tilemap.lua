@@ -18,10 +18,10 @@ function Tilemap:new(file)
 
     local imageWidth = t.images[#t.images]:getWidth()
     local imageHeight = t.images[#t.images]:getHeight()
-    local tileSize = 32
+    local tileSize = 128
     local quads = {}
-    for i = 1, (imageWidth*imageHeight)/32, 32 do
-        quads[math.floor(i/32)+1] = love.graphics.newQuad(math.floor((i-1)%imageWidth), 
+    for i = 1, (imageWidth*imageHeight)/128, 128 do
+        quads[math.floor(i/128)+1] = love.graphics.newQuad(math.floor((i-1)%imageWidth), 
             math.floor((i-1)/imageWidth)*tileSize, tileSize, tileSize,
             t.images[#t.images]:getWidth(), t.images[#t.images]:getHeight())
     end
@@ -32,8 +32,8 @@ function Tilemap:new(file)
     t.mapHeight = h
     t.tileWidth = t.file.tilewidth
     t.tileHeight = t.file.tileheight
-    t.zx = 2
-    t.zy = 2
+    t.zx = 0.5
+    t.zy = 0.5
     t.width = w * t.tileWidth * t.zx
     t.height = h * t.tileHeight * t.zy
 
@@ -75,7 +75,7 @@ function Tilemap:update()
         for x=0, self.mapWidth-1 do
             for y=0, self.mapHeight-1 do
               if layer[x+mapX][y+mapY] ~= 0 then
-                self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*32, y*32)
+                self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
               end
             end
         end
@@ -85,5 +85,5 @@ end
 
 function Tilemap:draw()
     love.graphics.draw(self.batch, math.floor(-Camera.x), math.floor(-Camera.y),
-    0, 2, 2)
+    0, self.zx, self.zy)
 end

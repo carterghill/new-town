@@ -6,11 +6,11 @@ require("src/Tiles")
 
 function love.load()
     Tiles:load()
-    t = Tilemap:new("assets/Maps/starter.lua")
+    t = Tilemap:new("assets/Maps/main.lua")
     t:update()
     
     forest = Tileset:new("assets/Tilesets/tileset.png")
-    player = Player:new()
+    player = Player:new(2500, 500)
     player2 = Player:new(50, 50)
     Camera:follow(player, 0.2)
 end
