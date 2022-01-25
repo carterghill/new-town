@@ -10,7 +10,7 @@ function love.load()
     t:update()
     
     forest = Tileset:new("assets/Tilesets/tileset.png")
-    player = Player:new(2500, 500)
+    player = Player:new(3500, 400)
     player2 = Player:new(50, 50)
     Camera:follow(player, 0.2)
 end
@@ -23,6 +23,8 @@ function love.draw()
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
     t:drawHigher()
     love.graphics.print(love.timer.getFPS())
+    local s = "("..player.x..", "..player.y.."): "..t:getCollisionTile(player.x, player.y)
+    love.graphics.print(s, 0, 16)
 end
 
 function love.update(dt)

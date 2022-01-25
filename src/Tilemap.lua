@@ -11,7 +11,7 @@ function Tilemap:new(file)
     local t = setmetatable( { Tilemap }, { __index = self } )
 
     t.file = love.filesystem.load(file)()
-    local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].filename)()
+    local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].exportfilename)()
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
     t.images[#t.images]:setFilter("nearest") 
@@ -54,7 +54,12 @@ function Tilemap:new(file)
             end
             map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
         end
-        t.layers[index] = map
+        if layer.name ~= "Collision" then
+            t.layers[index] = map
+        else
+            print("collision mapped")
+            t.collision = map
+        end
     end
 
     local map = {}
@@ -67,6 +72,15 @@ function Tilemap:new(file)
     t.map = map
 
     return t
+end
+
+function Tilemap:getCollisionTile(x, y)
+    if self.collision ~= nil then
+        local num = self.collision[math.floor((x/self.tileWidth)/self.zx) + 1][math.floor((y/self.tileHeight)/self.zy) + 1]
+        --print((math.floor((x/self.tileWidth)/self.zx) + 1)..", "..(math.floor((y/self.tileHeight)/self.zy) + 1).." = "..num)
+        return num
+    end
+    return 0
 end
 
 function Tilemap:update()
