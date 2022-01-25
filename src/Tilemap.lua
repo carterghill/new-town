@@ -23,7 +23,6 @@ function Tilemap:new(file)
     local tileSize = 32
     local quads = {}
     for i = 1, (imageWidth*imageHeight)/32, 32 do
-        print("("..math.floor((i-1)%imageWidth)..", "..math.floor((i-1)/imageWidth)*tileSize..") = "..math.floor(i/32)+1)
         quads[math.floor(i/32)+1] = love.graphics.newQuad(math.floor((i-1)%imageWidth), 
             math.floor((i-1)/imageWidth)*tileSize, tileSize, tileSize,
             t.images[#t.images]:getWidth(), t.images[#t.images]:getHeight())

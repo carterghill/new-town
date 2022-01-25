@@ -43,8 +43,6 @@ function Camera:update(dt, level)
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
 
-    print(self.y + h..", "..level.height)
-    print(self.x + w..", "..level.width)
     if level ~= nil then
         if self.x < 0 then
             self.x = 0
