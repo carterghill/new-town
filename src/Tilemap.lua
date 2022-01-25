@@ -12,8 +12,9 @@ function Tilemap:new(file)
 
     print(file)
     t.file = love.filesystem.load(file)()
+    print(t.file.tilesets[1].filename)
 
-    local tileset = love.filesystem.load(t.file.tilesets[1].filename)()
+    local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].filename)()
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
     t.images[#t.images]:setFilter("nearest") 
@@ -34,8 +35,10 @@ function Tilemap:new(file)
     t.mapHeight = h
     t.tileWidth = t.file.tilewidth
     t.tileHeight = t.file.tileheight
-    t.width = w * t.tileWidth
-    t.height = h * t.tileHeight
+    t.zx = 2
+    t.zy = 2
+    t.width = w * t.tileWidth * t.zx
+    t.height = h * t.tileHeight * t.zy
 
     t.batch = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
 
@@ -75,6 +78,7 @@ function Tilemap:update()
     for index, layer in ipairs(self.layers) do
         print("Layer index: "..index)
         for x=0, self.mapWidth-1 do
+            --print(x)
             for y=0, self.mapHeight-1 do
               --print("("..x+mapX..", "..y+mapY.."): "..self.map[x+mapX][y+mapY])
               if layer[x+mapX][y+mapY] ~= 0 then
