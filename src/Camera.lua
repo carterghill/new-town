@@ -21,15 +21,16 @@ function Camera:update(dt, level)
     if self.followObj ~= nil then
         local obj = self.followObj
         local time = self.followTime
+        local fx = w
+        local fy = h
         if (obj.dx ~= nil) then
-            --if obj.dx >
-            w = w - obj.dx*0.6
+            fx = fx - obj.dx*0.6
         end
         if (obj.dy ~= nil) then
-            h = h + obj.dy*0.6
+            fy = fy + obj.dy*0.6
         end
-        self.dx = (((obj.x + obj.width/2) - w/2) - self.x)/time
-        self.dy = (((obj.y + obj.height) - h/2) - self.y)/time
+        self.dx = (((obj.x + obj.width/2) - fx/2) - self.x)/time
+        self.dy = (((obj.y + obj.height) - fy/2) - self.y)/time
     end
 
     if self.lockObj ~= nil then
@@ -42,6 +43,8 @@ function Camera:update(dt, level)
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
 
+    print(self.y + h..", "..level.height)
+    print(self.x + w..", "..level.width)
     if level ~= nil then
         if self.x < 0 then
             self.x = 0

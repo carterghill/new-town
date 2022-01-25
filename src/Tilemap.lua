@@ -36,7 +36,7 @@ function Tilemap:new(file)
     t.tileWidth = t.file.tilewidth
     t.tileHeight = t.file.tileheight
     t.width = w * t.tileWidth
-    t.hieght = h * t.tileHeight
+    t.height = h * t.tileHeight
 
     t.batch = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
 
