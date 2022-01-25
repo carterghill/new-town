@@ -13,7 +13,7 @@ function Camera:new()
     return c
 end
 
-function Camera:update(dt)
+function Camera:update(dt, level)
 
     local w = love.graphics.getWidth()
     local h = love.graphics.getHeight()
@@ -22,6 +22,7 @@ function Camera:update(dt)
         local obj = self.followObj
         local time = self.followTime
         if (obj.dx ~= nil) then
+            --if obj.dx >
             w = w - obj.dx*0.6
         end
         if (obj.dy ~= nil) then
@@ -40,6 +41,19 @@ function Camera:update(dt)
 
     self.x = self.x + self.dx*dt
     self.y = self.y + self.dy*dt
+
+    if level ~= nil then
+        if self.x < 0 then
+            self.x = 0
+        elseif self.x + w > level.width then
+            self.x = level.width - w
+        end
+        if self.y < 0 then
+            self.y = 0
+        elseif self.y + h > level.height then
+            self.y = level.height - h
+        end
+    end
 
 end
 

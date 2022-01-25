@@ -1,6 +1,10 @@
 Tilemap = {
     images = {},
     quads = {},
+    width = 0,
+    height = 0,
+    tileWidth = 64,
+    tileHeight = 64
 }
 
 function Tilemap:new(file)
@@ -29,6 +33,10 @@ function Tilemap:new(file)
     local h = t.file.height
     t.mapWidth = w
     t.mapHeight = h
+    t.tileWidth = t.file.tilewidth
+    t.tileHeight = t.file.tileheight
+    t.width = w * t.tileWidth
+    t.hieght = h * t.tileHeight
 
     t.batch = love.graphics.newSpriteBatch(t.images[1], t.mapWidth * t.mapHeight)
 
