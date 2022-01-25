@@ -25,7 +25,7 @@ function Player:new(x, y)
     return s;
 end
 
-function Player:update(dt)
+function Player:update(dt, level)
     
     if self.controls.up then
         self.vy = self.vy + self.accel*dt
@@ -81,6 +81,19 @@ function Player:update(dt)
     self:normalize()
     self.x = self.x + self.dx*dt
     self.y = self.y - self.dy*dt
+
+    if level ~= nil then
+        if self.x < 0 then
+            self.x = 0
+        elseif self.x + self.width > level.width then
+            self.x = level.width - self.width
+        end
+        if self.y < 0 then
+            self.y = 0
+        elseif self.y + self.height > level.height then
+            self.y = level.height - self.height
+        end
+    end
 
 end
 

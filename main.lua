@@ -25,8 +25,8 @@ function love.draw()
 end
 
 function love.update(dt)
-    player:update(dt)
-    player2:update(dt)
+    player:update(dt, t)
+    player2:update(dt, t)
     Camera:update(dt, t)
     forest:update()
 end
