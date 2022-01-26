@@ -11,7 +11,7 @@ function Tilemap:new(file)
     local t = setmetatable( { Tilemap }, { __index = self } )
 
     t.file = love.filesystem.load(file)()
-    local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].exportfilename)()
+    local tileset = love.filesystem.load("assets/Maps/"..t.file.tilesets[1].filename)()
 
     t.images[#t.images+1] = love.graphics.newImage(tileset.image)
     t.images[#t.images]:setFilter("nearest") 

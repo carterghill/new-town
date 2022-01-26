@@ -1,15 +1,10 @@
 require("src/Player")
 require("src/Camera")
-require("src/Tileset")
 require("src/Tilemap")
-require("src/Tiles")
 
 function love.load()
-    Tiles:load()
     t = Tilemap:new("assets/Maps/main.lua")
     t:update()
-    
-    forest = Tileset:new("assets/Tilesets/tileset.png")
     player = Player:new(3500, 400)
     player2 = Player:new(50, 50)
     Camera:lockOn(player)
@@ -23,6 +18,9 @@ function love.draw()
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
     t:drawHigher()
+    love.graphics.setColor(0, 0, 0, 0.5)
+    love.graphics.rectangle("fill", 0, 0, 150, 75)
+    love.graphics.setColor(255, 255, 255, 1)
     love.graphics.print(love.timer.getFPS())
     local s = "("..math.floor(player.x)..", "..math.floor(player.y).."): "..t:getCollisionTile(player.x, player.y)
     love.graphics.print(s, 0, 16)
@@ -32,12 +30,11 @@ function love.update(dt)
     player:update(dt, t)
     player2:update(dt, t)
     Camera:update(dt, t)
-    forest:update()
 end
 
 function love.keypressed(key)
     if key == "f" then
-        love.window.setFullscreen(true)
+        love.window.setFullscreen(not love.window.getFullscreen())
     end
     player:keypressed(key)
     if key == "up" then
