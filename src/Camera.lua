@@ -68,4 +68,10 @@ function Camera:lockOn(obj)
     self.followObj = nil
     self.followTime = 1
     self.lockObj = obj
+    self.dx = 0
+    self.dy = 0
+    local w = love.graphics.getWidth()
+    local h = love.graphics.getHeight()
+    self.x = self.lockObj.x + self.lockObj.width/2 - w/2
+    self.y = self.lockObj.y + self.lockObj.height - h/2
 end

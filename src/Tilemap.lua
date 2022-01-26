@@ -75,9 +75,13 @@ end
 
 function Tilemap:getCollisionTile(x, y)
     if self.collision ~= nil then
-        local num = self.collision[math.floor((x/self.tileWidth)/self.zx) + 1][math.floor((y/self.tileHeight)/self.zy) + 1]
-        --print((math.floor((x/self.tileWidth)/self.zx) + 1)..", "..(math.floor((y/self.tileHeight)/self.zy) + 1).." = "..num)
-        return num
+        local tilex = math.floor((x/self.tileWidth)/self.zx) + 1
+        local tiley = math.floor((y/self.tileHeight)/self.zy) + 1
+        if tilex > 0 and tiley > 0 and tilex <= self.mapWidth and tiley <= self.mapHeight then
+            local num = self.collision[tilex][tiley]
+            --print((math.floor((x/self.tileWidth)/self.zx) + 1)..", "..(math.floor((y/self.tileHeight)/self.zy) + 1).." = "..num)
+            return num
+        end
     end
     return 0
 end
