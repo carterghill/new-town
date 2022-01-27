@@ -63,7 +63,6 @@ function Tilemap:new(file)
             t.objects = layer.objects
         else
             t.layers[#t.layers+1] = map
-            print(#t.layers)
         end
     end
 
@@ -85,7 +84,6 @@ function Tilemap:getCollisionTile(x, y)
         local tiley = math.floor((y/self.tileHeight)/self.zy) + 1
         if tilex > 0 and tiley > 0 and tilex <= self.mapWidth and tiley <= self.mapHeight then
             local num = self.collision[tilex][tiley]
-            --print((math.floor((x/self.tileWidth)/self.zx) + 1)..", "..(math.floor((y/self.tileHeight)/self.zy) + 1).." = "..num)
             return num
         end
     end

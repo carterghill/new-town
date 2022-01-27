@@ -30,6 +30,7 @@ function love.update(dt)
     player:update(dt, t)
     player2:update(dt, t)
     Camera:update(dt, t)
+    --t:update()
 end
 
 function love.keypressed(key)
