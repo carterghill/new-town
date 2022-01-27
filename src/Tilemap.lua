@@ -1,6 +1,7 @@
 Tilemap = {
     images = {},
     quads = {},
+    objects = {},
     width = 0,
     height = 0,
     tileWidth = 64,
@@ -48,16 +49,21 @@ function Tilemap:new(file)
 
     for index, layer in ipairs(t.file.layers) do
         local map = {}
-        for i, v in ipairs(layer.data) do
-            if map[(i-1)%w + 1] == nil then
-                map[(i-1)%w + 1] = {}
+        if layer.data ~= nil then
+            for i, v in ipairs(layer.data) do
+                if map[(i-1)%w + 1] == nil then
+                    map[(i-1)%w + 1] = {}
+                end
+                map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
             end
-            map[(i-1)%w + 1][math.floor((i-1)/(w))+1] = v
         end
-        if layer.name ~= "Collision" then
-            t.layers[index] = map
-        else
+        if layer.name == "Collision" then
             t.collision = map
+        elseif layer.type == "objectgroup" then
+            t.objects = layer.objects
+        else
+            t.layers[#t.layers+1] = map
+            print(#t.layers)
         end
     end
 

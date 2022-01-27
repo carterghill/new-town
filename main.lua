@@ -8,7 +8,7 @@ function love.load()
     player = Player:new(3500, 400)
     player2 = Player:new(50, 50)
     Camera:lockOn(player)
-    Camera:follow(player, 0.2)
+    --Camera:follow(player, 0.2)
 end
 
 function love.draw()
