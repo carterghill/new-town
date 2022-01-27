@@ -90,7 +90,7 @@ function Tilemap:getCollisionTile(x, y)
     return 0
 end
 
-function Tilemap:update()
+function Tilemap:bakeLevel()
     local mapX = 1
     local mapY = 1
     self.batch:clear()

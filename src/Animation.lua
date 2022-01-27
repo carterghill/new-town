@@ -18,8 +18,8 @@ function Animation:new(img, fps, width, height, zx, zy)
 
     a.image = img
     a.image:setFilter("nearest") 
-    a.zx = sx or 1
-    a.zy = sy or 1
+    a.zx = zx or 1
+    a.zy = zy or 1
     a.fps = fps or 12
 
     local imageWidth = a.image:getWidth()
@@ -33,7 +33,7 @@ function Animation:new(img, fps, width, height, zx, zy)
     for y = 1, tilesy, 1 do
         for x = 1, tilesx, 1 do
             quads[x + (y-1)*tilesx] = love.graphics.newQuad((x-1)*tileWidth, (y-1)*tileHeight, tileWidth, tileHeight, imageWidth, imageHeight)
-            print(x.." + ("..y.."-1)*"..tilesx.." = "..(x + (y-1)*tilesx))
+            --print(x.." + ("..y.."-1)*"..tilesx.." = "..(x + (y-1)*tilesx))
         end
     end
 
