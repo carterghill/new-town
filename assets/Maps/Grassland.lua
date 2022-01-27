@@ -8,9 +8,9 @@ return {
   spacing = 0,
   margin = 0,
   columns = 16,
-  image = "assets/Tilesets/Grassland@128x128.png",
+  image = "assets/Tilesets/GrasslandFull@128x128.png",
   imagewidth = 2048,
-  imageheight = 2048,
+  imageheight = 4096,
   objectalignment = "unspecified",
   tileoffset = {
     x = 0,
@@ -23,6 +23,6 @@ return {
   },
   properties = {},
   wangsets = {},
-  tilecount = 256,
+  tilecount = 512,
   tiles = {}
 }
