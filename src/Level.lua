@@ -41,8 +41,6 @@ end
 
 function Level:drawObjects()
     for i, v in ipairs(self.objects) do
-        print("("..v.x..", "..v.y..")")
-        v:draw(3500, 1000)
         v:draw(v.x*v.zx, v.y*v.zy)
     end
 end
