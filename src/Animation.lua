@@ -14,7 +14,7 @@ Animation = {
 function Animation:new(img, width, height, zx, zy)
     local a = setmetatable( { Animation }, { __index = self } )
 
-    a.image = love.graphics.newImage(img)
+    a.image = img
     a.image:setFilter("nearest") 
     a.zx = sx or 1
     a.zy = sy or 1
@@ -32,6 +32,7 @@ function Animation:new(img, width, height, zx, zy)
         end
     end
 
+    a.quads = quads
     a.batch = love.graphics.newSpriteBatch(a.image, tilesx * tilesy)
 
     --[[for i = 1, (imageWidth*imageHeight)/128, 128 do
@@ -96,7 +97,7 @@ function Animation:update()
     local mapY = 1
     self.batch:clear()
 
-    self.batch:add(self.quads[1], x*self.tileWidth, y*self.tileHeight)
+    self.batch:add(self.quads[1], 0, 0)
 
     self.batch:flush()
 end
