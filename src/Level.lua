@@ -12,7 +12,7 @@ function Level:new(file)
     for i, v in ipairs(l.tileMap.objects) do
         if v.type =="Waterfall" then
             local img = love.graphics.newImage("assets/Tilesets/Waterfall@128x128.png")
-            local anim = Animation:new(img, 6, 512, 384, 0.5, 0.5)
+            local anim = Animation:new(img, 8, 512, 384, 0.5, 0.5)
             anim.x = v.x
             anim.y = v.y
             l.objects[#l.objects+1] = anim

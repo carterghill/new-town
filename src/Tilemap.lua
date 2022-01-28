@@ -99,7 +99,7 @@ function Tilemap:bakeLevel()
             for y=0, self.mapHeight-1 do
               if layer[x+mapX][y+mapY] ~= 0 then
                 self.batch:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
-                if index > 2 then
+                if index > 3 then
                     self.batchHigher:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
                 else
                     self.batchLower:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)

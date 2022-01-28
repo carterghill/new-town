@@ -32,8 +32,8 @@ function Animation:new(img, fps, width, height, zx, zy)
 
     for y = 1, tilesy, 1 do
         for x = 1, tilesx, 1 do
-            quads[x + (y-1)*tilesx] = love.graphics.newQuad((x-1)*tileWidth, (y-1)*tileHeight, tileWidth, tileHeight, imageWidth, imageHeight)
-            --print(x.." + ("..y.."-1)*"..tilesx.." = "..(x + (y-1)*tilesx))
+            quads[x + (y-1)*tilesx] = love.graphics.newQuad((x-1)*tileWidth, 
+            (y-1)*tileHeight, tileWidth, tileHeight, imageWidth, imageHeight)
         end
     end
 
