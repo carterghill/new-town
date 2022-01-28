@@ -6,7 +6,8 @@ require("src/Level")
 
 function love.load()
     l = Level:new("assets/Maps/main.lua")
-    --t = Tilemap:new("assets/Maps/main.lua")
+    t = Tilemap:new("assets/Maps/main.lua")
+   -- thread = love.thread.newThread( "thread.lua" )
     --waterfallSheet = love.graphics.newImage("assets/Tilesets/Waterfall@128x128.png")
     --waterfall = Animation:new(waterfallSheet, 6, 512, 384, 0.5, 0.5)
     --waterfall:update(dt)
@@ -40,8 +41,9 @@ function love.update(dt)
     player2:update(dt, l.tileMap)
     Camera:update(dt, l.tileMap)
     l:update(dt)
-    --waterfall:update(dt)
-    --t:update()
+    --waterfall:update(dt)bakeLevel
+   -- thread:start( t:bakeLevel() )
+    --t:bakeLevel()
 end
 
 function love.keypressed(key)
