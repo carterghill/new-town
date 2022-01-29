@@ -7,33 +7,28 @@ require("src/Level")
 function love.load()
     l = Level:new("assets/Maps/main.lua")
     t = Tilemap:new("assets/Maps/main.lua")
-   -- thread = love.thread.newThread( "thread.lua" )
-    --waterfallSheet = love.graphics.newImage("assets/Tilesets/Waterfall@128x128.png")
-    --waterfall = Animation:new(waterfallSheet, 6, 512, 384, 0.5, 0.5)
-    --waterfall:update(dt)
-    --t:bakeLevel()
     player = Player:new(3500, 400)
     player2 = Player:new(50, 50)
     Camera:lockOn(player)
-    --Camera:follow(player, 0.2)
 end
 
 function love.draw()
-   -- t:drawLower()
+
+    -- Level and Character
     l:drawBottomLayer()
     love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
     love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
-    --waterfall:draw(3500, 1000)
     l:drawObjects()
     l:drawTopLayer()
 
-    --t:drawHigher()
+    -- UI
     love.graphics.setColor(0, 0, 0, 0.5)
     love.graphics.rectangle("fill", 0, 0, 150, 75)
     love.graphics.setColor(255, 255, 255, 1)
     love.graphics.print(love.timer.getFPS())
     local s = "("..math.floor(player.x)..", "..math.floor(player.y).."): "..l.tileMap:getCollisionTile(player.x, player.y)
     love.graphics.print(s, 0, 16)
+
 end
 
 function love.update(dt)
@@ -41,9 +36,6 @@ function love.update(dt)
     player2:update(dt, l.tileMap)
     Camera:update(dt, l.tileMap)
     l:update(dt)
-    --waterfall:update(dt)bakeLevel
-   -- thread:start( t:bakeLevel() )
-    --t:bakeLevel()
 end
 
 function love.keypressed(key)
