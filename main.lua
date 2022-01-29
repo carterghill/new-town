@@ -33,43 +33,21 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
+
+    Players:keypressed(key)
+
     if key == "f" then
         love.window.setFullscreen(not love.window.getFullscreen())
     end
     if key == "r" then
         l.tileMap:bakeLevel()
     end
-    player:keypressed(key)
-    if key == "up" then
-        player2.controls.up = true
-    end
-    if key == "down" then
-        player2.controls.down = true
-    end
-    if key == "left" then
-        player2.controls.left = true
-    end
-    if key == "right" then
-        player2.controls.right = true
-    end
     if key =="escape" then
         love.event.quit()
     end
+    
 end
 
 function love.keyreleased(key)
-    player:keyreleased(key)
-
-    if key == "up" then
-        player2.controls.up = false
-    end
-    if key == "down" then
-        player2.controls.down = false
-    end
-    if key == "left" then
-        player2.controls.left = false
-    end
-    if key == "right" then
-        player2.controls.right = false
-    end
+    Players:keyreleased(key)
 end
