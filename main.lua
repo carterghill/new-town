@@ -8,7 +8,6 @@ require("src/UI")
 
 function love.load()
     l = Level:new("assets/Maps/main.lua")
-    t = Tilemap:new("assets/Maps/main.lua")
     Players:load(l)
     Camera:lockOn(player)
 end
@@ -45,7 +44,7 @@ function love.keypressed(key)
     if key =="escape" then
         love.event.quit()
     end
-    
+
 end
 
 function love.keyreleased(key)
