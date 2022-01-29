@@ -9,7 +9,7 @@ return {
   tilewidth = 128,
   tileheight = 128,
   nextlayerid = 9,
-  nextobjectid = 14,
+  nextobjectid = 16,
   properties = {},
   tilesets = {
     {
@@ -407,8 +407,8 @@ return {
           name = "",
           type = "Spawn",
           shape = "rectangle",
-          x = 10496,
-          y = 6912,
+          x = 11008,
+          y = 6656,
           width = 128,
           height = 128,
           rotation = 0,

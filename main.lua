@@ -3,6 +3,7 @@ require("src/Camera")
 require("src/Tilemap")
 require("src/Animation")
 require("src/Level")
+require("src/UI")
 
 function love.load()
     l = Level:new("assets/Maps/main.lua")
@@ -22,12 +23,13 @@ function love.draw()
     l:drawTopLayer()
 
     -- UI
-    love.graphics.setColor(0, 0, 0, 0.5)
-    love.graphics.rectangle("fill", 0, 0, 150, 75)
-    love.graphics.setColor(255, 255, 255, 1)
-    love.graphics.print(love.timer.getFPS())
-    local s = "("..math.floor(player.x)..", "..math.floor(player.y).."): "..l.tileMap:getCollisionTile(player.x, player.y)
-    love.graphics.print(s, 0, 16)
+    UI:draw(player)
+    --love.graphics.setColor(0, 0, 0, 0.5)
+    --love.graphics.rectangle("fill", 0, 0, 150, 75)
+    --love.graphics.setColor(255, 255, 255, 1)
+    --love.graphics.print(love.timer.getFPS())
+    --local s = "("..math.floor(player.x)..", "..math.floor(player.y).."): "..l.tileMap:getCollisionTile(player.x, player.y)
+    --love.graphics.print(s, 0, 16)
 
 end
 
