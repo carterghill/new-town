@@ -1,4 +1,5 @@
 require("src/Player")
+require("src/Players")
 require("src/Camera")
 require("src/Tilemap")
 require("src/Animation")
@@ -8,8 +9,7 @@ require("src/UI")
 function love.load()
     l = Level:new("assets/Maps/main.lua")
     t = Tilemap:new("assets/Maps/main.lua")
-    player2 = Player:new(3500, 400)
-    player = Player:new(l.startx, l.starty)
+    Players:load(l)
     Camera:lockOn(player)
 end
 
@@ -17,25 +17,17 @@ function love.draw()
 
     -- Level and Character
     l:drawBottomLayer()
-    love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
-    love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
+    Players:draw()
     l:drawObjects()
     l:drawTopLayer()
 
     -- UI
     UI:draw(player)
-    --love.graphics.setColor(0, 0, 0, 0.5)
-    --love.graphics.rectangle("fill", 0, 0, 150, 75)
-    --love.graphics.setColor(255, 255, 255, 1)
-    --love.graphics.print(love.timer.getFPS())
-    --local s = "("..math.floor(player.x)..", "..math.floor(player.y).."): "..l.tileMap:getCollisionTile(player.x, player.y)
-    --love.graphics.print(s, 0, 16)
 
 end
 
 function love.update(dt)
-    player:update(dt, l.tileMap)
-    player2:update(dt, l.tileMap)
+    Players:update(dt)
     Camera:update(dt, l.tileMap)
     l:update(dt)
 end
