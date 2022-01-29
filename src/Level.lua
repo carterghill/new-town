@@ -1,6 +1,8 @@
 Level = {
     tileMap = {},
-    objects = {}
+    objects = {},
+    startx = 0,
+    starty = 0
 }
 
 function Level:new(file)
@@ -16,6 +18,10 @@ function Level:new(file)
             anim.x = v.x
             anim.y = v.y
             l.objects[#l.objects+1] = anim
+        end
+        if v.type == "Spawn" then
+            self.startx = v.x*0.5
+            self.starty = v.y*0.5
         end
     end
 

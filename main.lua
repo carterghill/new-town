@@ -7,8 +7,8 @@ require("src/Level")
 function love.load()
     l = Level:new("assets/Maps/main.lua")
     t = Tilemap:new("assets/Maps/main.lua")
-    player = Player:new(3500, 400)
-    player2 = Player:new(50, 50)
+    player2 = Player:new(3500, 400)
+    player = Player:new(l.startx, l.starty)
     Camera:lockOn(player)
 end
 
@@ -41,6 +41,9 @@ end
 function love.keypressed(key)
     if key == "f" then
         love.window.setFullscreen(not love.window.getFullscreen())
+    end
+    if key == "r" then
+        l.tileMap:bakeLevel()
     end
     player:keypressed(key)
     if key == "up" then
