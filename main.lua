@@ -18,13 +18,13 @@ function love.draw()
 
     -- Level and Character
     l:drawBottomLayer()
+    a:draw(player.x, player.y)
     Players:draw()
     l:drawObjects()
     l:drawTopLayer()
 
     -- UI
     UI:draw(player)
-    a:draw(player.x, player.y)
 
 end
 
@@ -32,6 +32,7 @@ function love.update(dt)
     Players:update(dt)
     Camera:update(dt, l.tileMap)
     l:update(dt)
+    a:update(dt)
 end
 
 function love.keypressed(key)

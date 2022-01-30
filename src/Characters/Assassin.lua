@@ -1,6 +1,7 @@
 Assassin = {
-    direction = "down",
+    direction = "Front",
     animations = {},
+    state = "Walk"
 }
 
 function Assassin:new()
@@ -13,9 +14,9 @@ function Assassin:new()
             a.animations[v] = {}
             for i, anim in ipairs(dir) do
                 if love.filesystem.isDirectory("assets/Characters/Assassin/"..v.."/"..anim) then
-                    --print(anim)
+                    --print(love.filesystem.getInfo("assets/Characters/Assassin/"..v.."/"..anim))
                     local t = a.animations[v]
-                    local animation = Animation:new("assets/Characters/Assassin/"..v.."/"..anim)
+                    local animation = Animation:new("assets/Characters/Assassin/"..v.."/"..anim, 6, 64, 64, 0.3, 0.3)
                     t[anim] = animation
                 end
             end
@@ -28,9 +29,10 @@ function Assassin:new()
 end
 
 function Assassin:draw(x, y)
-    for i, v in ipairs(self.animations) do
-        love.graphics.print(i..") "..v, 0, 32)
-    end
-    print(self.walk.draw)
-    self.walk:draw(x, y)
+    self.animations[self.direction][self.state]:draw(x-48, y-96)
+    --self.walk:draw(x, y)
+end
+
+function Assassin:update(dt)
+    self.animations[self.direction][self.state]:update(dt)
 end

@@ -16,26 +16,22 @@ function Animation:new(img, fps, width, height, zx, zy)
 
     local a = {}
     a = setmetatable( { Animation }, { __index = self } )
+    a.zx = zx or 1
+    a.zy = zy or 1
+    a.fps = fps or 12
+
 
     if type(img) == "string" then
         a.type = "folder"
         a.quads = {}
         local dir = love.filesystem.getDirectoryItems(img)
         for i, v in ipairs(dir) do
-            
-            print(img.."/"..v)
             a.quads[#a.quads+1] = love.graphics.newImage(img.."/"..v)
-            print(#a.quads)
-            print(i)
         end
     else
 
         a.image = img
         a.image:setFilter("nearest") 
-        a.zx = zx or 1
-        a.zy = zy or 1
-        a.fps = fps or 12
-
         local imageWidth = a.image:getWidth()
         local imageHeight = a.image:getHeight()
         local tileWidth = width or 128
@@ -69,15 +65,18 @@ function Animation:update(dt)
             self.frame = self.frame + 1
         end
         self.frameAge = 0
-        self.batch:clear()
-        self.batch:add(self.quads[self.frame])
-        self.batch:flush()
+        if self.type == "tileset" then
+            self.batch:clear()
+            self.batch:add(self.quads[self.frame])
+            self.batch:flush()
+        end
+        
     end
 end
 
 function Animation:draw(x, y)
     if self.type == "folder" then
-        love.graphics.draw(self.quads[1], x - Camera.x, y - Camera.y)
+        love.graphics.draw(self.quads[self.frame], x - Camera.x, y - Camera.y, 0, self.zx, self.zy)
     else
         love.graphics.draw(self.batch, math.floor(x - Camera.x), math.floor(y - Camera.y ),
         0, self.zx, self.zy)
