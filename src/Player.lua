@@ -32,9 +32,9 @@ end
 function Player:update(dt, level)
     
     if self.controls.up then
-        if self.character ~= nil then
-            self.character:setDirection("Back")
-        end
+        --if self.character ~= nil and self.vy > 0 then
+        --    self.character:setDirection("Back")
+        --end
         self.vy = self.vy + self.accel*dt
     elseif self.vy > 0 then
         if self.vy < self.friction*dt then
@@ -45,9 +45,9 @@ function Player:update(dt, level)
     end
 
     if self.controls.down then
-        if self.character ~= nil then
-            self.character:setDirection("Front")
-        end
+        --if self.character ~= nil and self.vy < 0 then
+         --   self.character:setDirection("Front")
+        --end
         self.vy = self.vy - self.accel*dt
     elseif self.vy < 0 then
         if self.vy > -self.friction*dt then
@@ -59,9 +59,9 @@ function Player:update(dt, level)
 
     if self.controls.left then
         self.vx = self.vx - self.accel*dt
-        if self.character ~= nil then
-            self.character:setDirection("Left")
-        end
+        --if self.character ~= nil and self.vx < 0 and math.abs(self.vy) < 0.01 then
+        --    self.character:setDirection("Left")
+        --end
     elseif self.vx < 0 then
         if self.vx > -self.friction*dt then
             self.vx = 0
@@ -71,9 +71,9 @@ function Player:update(dt, level)
     end
 
     if self.controls.right then
-        if self.character ~= nil then
-            self.character:setDirection("Right")
-        end
+       -- if self.character ~= nil and self.vx > 0 and math.abs(self.vy) < 0.01 then
+       --     self.character:setDirection("Right")
+       -- end
         self.vx = self.vx + self.accel*dt
     elseif self.vx > 0 then
         if self.dx < self.friction*dt then
@@ -154,6 +154,16 @@ function Player:update(dt, level)
     self:normalize()
     self.x = self.x + self.dx*dt
     self.y = self.y - self.dy*dt
+
+    if self.dx > 0 and self.dx > math.abs(self.dy) then
+        self.character:setDirection("Right")
+    elseif self.dx < 0 and self.dx < math.abs(self.dy) then
+        self.character:setDirection("Left")
+    elseif self.dy < math.abs(self.dx) then
+        self.character:setDirection("Front")
+    elseif self.dy > math.abs(self.dx) then
+        self.character:setDirection("Back")
+    end
 
 end
 

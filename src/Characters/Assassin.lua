@@ -29,7 +29,7 @@ function Assassin:new()
 end
 
 function Assassin:draw(x, y)
-    self.animations[self.direction][self.state]:draw(x-48, y-96)
+    self.animations[self.direction][self.state]:draw(x-45, y-96)
     --self.walk:draw(x, y)
 end
 
