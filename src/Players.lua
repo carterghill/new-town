@@ -10,8 +10,7 @@ end
 
 function Players:draw()
     player:draw()
-    love.graphics.rectangle("line", player.x - Camera.x, player.y - Camera.y, player.width, player.height)
-    love.graphics.rectangle("line", player2.x - Camera.x, player2.y - Camera.y, player2.width, player2.height)
+    player2:draw()
 end
 
 function Players:update(dt)

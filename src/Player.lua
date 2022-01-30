@@ -199,6 +199,8 @@ end
 function Player:draw()
     if self.character ~= nil then
         self.character:draw(self.x, self.y)
+    else
+        love.graphics.rectangle("line", self.x - Camera.x, self.y - Camera.y, self.width, self.height)
     end
 end
 
