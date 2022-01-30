@@ -29,6 +29,11 @@ function Level:new(file)
             s = ": "..tostring(val)
             print("\t"..k..s)
         end
+        if v.type == "TallGrass" then
+            local newObj = TileObject:new(v, l.tileMap)
+            print(newObj.x)
+            l.objects[#l.objects+1] = newObj
+        end
     end
 
     l.tileMap:bakeLevel()
