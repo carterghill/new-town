@@ -36,3 +36,10 @@ end
 function Assassin:update(dt)
     self.animations[self.direction][self.state]:update(dt)
 end
+
+function Assassin:setDirection(direction)
+    if direction ~= self.direction then
+        self.animations[self.direction][self.state].frame = 1
+        self.direction = direction
+    end
+end

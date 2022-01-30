@@ -11,14 +11,14 @@ function love.load()
     l = Level:new("assets/Maps/main.lua")
     Players:load(l)
     Camera:lockOn(player)
-    a = Assassin:new()
+    --a = Assassin:new()
 end
 
 function love.draw()
 
     -- Level and Character
     l:drawBottomLayer()
-    a:draw(player.x, player.y)
+    --a:draw(player.x, player.y)
     Players:draw()
     l:drawObjects()
     l:drawTopLayer()
@@ -32,7 +32,7 @@ function love.update(dt)
     Players:update(dt)
     Camera:update(dt, l.tileMap)
     l:update(dt)
-    a:update(dt)
+    --a:update(dt)
 end
 
 function love.keypressed(key)

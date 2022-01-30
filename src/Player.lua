@@ -14,20 +14,27 @@ Player = {
     friction = 1000;
     topSpeed = 300;
     controls = Controls:new(),
-    input = Input:new(Keyboard:new())
+    input = Input:new(Keyboard:new());
+    character = nil;
 }
 
-function Player:new(x, y)
+function Player:new(x, y, character)
     local s = setmetatable( { Player }, { __index = self } )
     s.x = x or 0
     s.y = y or 0
     s.controls = Controls:new()
+    if character ~= nil then
+        s.character = character
+    end
     return s;
 end
 
 function Player:update(dt, level)
     
     if self.controls.up then
+        if self.character ~= nil then
+            self.character:setDirection("Back")
+        end
         self.vy = self.vy + self.accel*dt
     elseif self.vy > 0 then
         if self.vy < self.friction*dt then
@@ -38,6 +45,9 @@ function Player:update(dt, level)
     end
 
     if self.controls.down then
+        if self.character ~= nil then
+            self.character:setDirection("Front")
+        end
         self.vy = self.vy - self.accel*dt
     elseif self.vy < 0 then
         if self.vy > -self.friction*dt then
@@ -49,6 +59,9 @@ function Player:update(dt, level)
 
     if self.controls.left then
         self.vx = self.vx - self.accel*dt
+        if self.character ~= nil then
+            self.character:setDirection("Left")
+        end
     elseif self.vx < 0 then
         if self.vx > -self.friction*dt then
             self.vx = 0
@@ -58,6 +71,9 @@ function Player:update(dt, level)
     end
 
     if self.controls.right then
+        if self.character ~= nil then
+            self.character:setDirection("Right")
+        end
         self.vx = self.vx + self.accel*dt
     elseif self.vx > 0 then
         if self.dx < self.friction*dt then
@@ -130,6 +146,11 @@ function Player:update(dt, level)
 
     end
 
+
+    if self.character ~= nil then
+        self.character:update(dt)
+    end
+
     self:normalize()
     self.x = self.x + self.dx*dt
     self.y = self.y - self.dy*dt
@@ -152,6 +173,12 @@ function Player:normalize()
     else
        self.dx = 0
        self.dy = 0 
+    end
+end
+
+function Player:draw()
+    if self.character ~= nil then
+        self.character:draw(self.x, self.y)
     end
 end
 
