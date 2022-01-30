@@ -16,7 +16,12 @@ function Assassin:new()
                 if love.filesystem.isDirectory("assets/Characters/Assassin/"..v.."/"..anim) then
                     --print(love.filesystem.getInfo("assets/Characters/Assassin/"..v.."/"..anim))
                     local t = a.animations[v]
-                    local animation = Animation:new("assets/Characters/Assassin/"..v.."/"..anim, 6, 64, 64, 0.3, 0.3)
+                    local fps = 6
+                    print(anim)
+                    if anim == "Idle" then
+                        fps = 4
+                    end
+                    local animation = Animation:new("assets/Characters/Assassin/"..v.."/"..anim, fps, 64, 64, 0.3, 0.3)
                     t[anim] = animation
                 end
             end
@@ -41,5 +46,12 @@ function Assassin:setDirection(direction)
     if direction ~= self.direction then
         self.animations[self.direction][self.state].frame = 1
         self.direction = direction
+    end
+end
+
+function Assassin:setState(state)
+    if state ~= self.state then
+        self.animations[self.direction][self.state].frame = 1
+        self.state = state
     end
 end

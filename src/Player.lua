@@ -155,14 +155,24 @@ function Player:update(dt, level)
     self.x = self.x + self.dx*dt
     self.y = self.y - self.dy*dt
 
-    if self.dx > 0 and self.dx > math.abs(self.dy) then
-        self.character:setDirection("Right")
-    elseif self.dx < 0 and self.dx < math.abs(self.dy) then
-        self.character:setDirection("Left")
-    elseif self.dy < math.abs(self.dx) then
-        self.character:setDirection("Front")
-    elseif self.dy > math.abs(self.dx) then
-        self.character:setDirection("Back")
+    if self.character ~= nil then
+
+        if self.dx > 0 and self.dx > math.abs(self.dy) then
+            self.character:setDirection("Right")
+        elseif self.dx < 0 and self.dx < math.abs(self.dy) then
+            self.character:setDirection("Left")
+        elseif self.dy < math.abs(self.dx) then
+            self.character:setDirection("Front")
+        elseif self.dy > math.abs(self.dx) then
+            self.character:setDirection("Back")
+        end
+
+        if math.abs(self.dx) < 25 and math.abs(self.dy) < 25 then
+            self.character:setState("Idle")
+        else
+            self.character:setState("Walk")
+        end
+
     end
 
 end
