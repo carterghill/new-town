@@ -9,7 +9,7 @@ return {
   tilewidth = 128,
   tileheight = 128,
   nextlayerid = 9,
-  nextobjectid = 16,
+  nextobjectid = 18,
   properties = {},
   tilesets = {
     {
@@ -412,6 +412,20 @@ return {
           width = 128,
           height = 128,
           rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 17,
+          name = "",
+          type = "TallGrass",
+          shape = "rectangle",
+          x = 9932,
+          y = 5192,
+          width = 128,
+          height = 128,
+          rotation = 0,
+          gid = 241,
           visible = true,
           properties = {}
         }

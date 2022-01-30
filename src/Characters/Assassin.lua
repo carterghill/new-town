@@ -17,7 +17,7 @@ function Assassin:new()
                     --print(love.filesystem.getInfo("assets/Characters/Assassin/"..v.."/"..anim))
                     local t = a.animations[v]
                     local fps = 6
-                    print(anim)
+                    --print(anim)
                     if anim == "Idle" then
                         fps = 4
                     end

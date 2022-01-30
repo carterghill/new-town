@@ -20,8 +20,14 @@ function Level:new(file)
             l.objects[#l.objects+1] = anim
         end
         if v.type == "Spawn" then
-            self.startx = v.x*0.5
-            self.starty = v.y*0.5
+            self.startx = v.x*v.zx
+            self.starty = v.y*v.zy
+        end
+        print(i)
+        for k, val in pairs(v) do
+            local s = ""
+            s = ": "..tostring(val)
+            print("\t"..k..s)
         end
     end
 
