@@ -5,11 +5,13 @@ require("src/Tilemap")
 require("src/Animation")
 require("src/Level")
 require("src/UI")
+require("src/Characters/Assassin")
 
 function love.load()
     l = Level:new("assets/Maps/main.lua")
     Players:load(l)
     Camera:lockOn(player)
+    a = Assassin:new()
 end
 
 function love.draw()
@@ -22,6 +24,7 @@ function love.draw()
 
     -- UI
     UI:draw(player)
+    a:draw(player.x, player.y)
 
 end
 
