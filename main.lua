@@ -19,7 +19,6 @@ function love.draw()
 
     -- Level and Character
     l:drawBottomLayer()
-    --a:draw(player.x, player.y)
     Players:draw()
     l:drawObjects(player)
     l:drawTopLayer()

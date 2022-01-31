@@ -39,6 +39,11 @@ function Level:new(file)
             --[ri]
             l.objects[#l.objects+1] = newObj
         end
+        if v.type ~= "TallGrass" and v.gid ~= nil then
+            local newObj = TileObject:new(v, l.tileMap)
+            --[ri]
+            l.objects[#l.objects+1] = newObj
+        end
     end
 
     table.sort(l.objects, orderY)
