@@ -9,7 +9,7 @@ function Players:load(level)
 end
 
 function Players:draw()
-    player:draw()
+    --player:draw()
     player2:draw()
 end
 

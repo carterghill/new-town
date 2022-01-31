@@ -21,7 +21,7 @@ function love.draw()
     l:drawBottomLayer()
     --a:draw(player.x, player.y)
     Players:draw()
-    l:drawObjects()
+    l:drawObjects(player)
     l:drawTopLayer()
 
     -- UI

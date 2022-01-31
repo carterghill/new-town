@@ -19,10 +19,14 @@ function TileObject:new(obj, tilemap)
     t.y = obj.y*tilemap.zy
     t.zx = tilemap.zx
     t.zy = tilemap.zy
+    t.height = tilemap.tileHeight
+    t.width = tilemap.tile
 
     return t
 
 end
+
+
 
 function TileObject:bakeObject()
     self.batch:clear()
@@ -30,7 +34,9 @@ function TileObject:bakeObject()
     --    for x=0, self.mapWidth-1 do
     --        for y=0, self.mapHeight-1 do
     --          if layer[x+mapX][y+mapY] ~= 0 then
-                self.batch:add(self.quads[self.gid], 0, 0)
+        print(gid)
+                self.batch:add(self.quads[self.gid-16], 0, 0)
+                self.batch:add(self.quads[self.gid], 0, 128)
                 --if index > 3 then
                 --    self.batchHigher:add(self.quads[layer[x+mapX][y+mapY]], x*self.tileWidth, y*self.tileHeight)
                 --else
@@ -48,7 +54,6 @@ function TileObject:update(dt)
 end
 
 function TileObject:draw()
-    print(self.x)
-    love.graphics.draw(self.batch, math.floor(self.x-Camera.x), math.floor(self.y-Camera.y),
+    love.graphics.draw(self.batch, math.floor(self.x-Camera.x), math.floor(self.y-128-Camera.y),
     0, self.zx, self.zy)
 end
