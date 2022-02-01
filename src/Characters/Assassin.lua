@@ -9,15 +9,13 @@ function Assassin:new()
 
     local folder = love.filesystem.getDirectoryItems("assets/Characters/Assassin")
     for i, v in ipairs(folder) do
-        if love.filesystem.isDirectory("assets/Characters/Assassin/"..v) then
+        if love.filesystem.getInfo("assets/Characters/Assassin/"..v).type == "directory" then
             local dir = love.filesystem.getDirectoryItems("assets/Characters/Assassin/"..v)
             a.animations[v] = {}
             for i, anim in ipairs(dir) do
-                if love.filesystem.isDirectory("assets/Characters/Assassin/"..v.."/"..anim) then
-                    --print(love.filesystem.getInfo("assets/Characters/Assassin/"..v.."/"..anim))
+                if love.filesystem.getInfo("assets/Characters/Assassin/"..v.."/"..anim).type == "directory" then
                     local t = a.animations[v]
                     local fps = 6
-                    --print(anim)
                     if anim == "Idle" then
                         fps = 4
                     end
@@ -35,7 +33,6 @@ end
 
 function Assassin:draw(x, y)
     self.animations[self.direction][self.state]:draw(x-45, y-96)
-    --self.walk:draw(x, y)
 end
 
 function Assassin:update(dt)

@@ -19,7 +19,8 @@ function Animation:new(img, fps, width, height, zx, zy)
     a.zx = zx or 1
     a.zy = zy or 1
     a.fps = fps or 12
-
+    a.width = width or 0
+    a.height = height or 0
 
     if type(img) == "string" then
         a.type = "folder"

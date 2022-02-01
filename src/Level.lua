@@ -21,7 +21,7 @@ function Level:new(file)
             local anim = Animation:new(img, 8, 512, 384, l.tileMap.zx, l.tileMap.zy)
             anim.x = v.x*l.tileMap.zx
             anim.y = v.y*l.tileMap.zy
-            print(anim.x..", "..anim.y)
+            --print(anim.x..", "..anim.y)
             l.objects[#l.objects+1] = anim
         end
         if v.type == "Spawn" then
@@ -32,14 +32,9 @@ function Level:new(file)
         for k, val in pairs(v) do
             local s = ""
             s = ": "..tostring(val)
-            print("\t"..k..s)
+            --print("\t"..k..s)
         end
-        if v.type == "TallGrass" or v.gid == 241 then
-            local newObj = TileObject:new(v, l.tileMap)
-            --[ri]
-            l.objects[#l.objects+1] = newObj
-        end
-        if v.type ~= "TallGrass" and v.gid ~= nil then
+        if v.gid ~= nil then
             local newObj = TileObject:new(v, l.tileMap)
             --[ri]
             l.objects[#l.objects+1] = newObj
