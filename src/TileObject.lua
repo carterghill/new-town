@@ -16,7 +16,7 @@ function TileObject:new(obj, tilemap)
     t.gid = obj.gid
     t.quads = tilemap.quads
     t.x = obj.x*tilemap.zx
-    t.y = obj.y*tilemap.zy
+    t.y = obj.y*tilemap.zy - tilemap.tileHeight*tilemap.zy
     t.zx = tilemap.zx
     t.zy = tilemap.zy
     t.height = tilemap.tileHeight
@@ -41,6 +41,7 @@ function TileObject:bakeObject()
         self.batch:add(self.quads[self.gid], 0, 128)
     end
 
+
     self.batch:flush()
 end
 
@@ -49,5 +50,6 @@ function TileObject:update(dt)
 end
 
 function TileObject:draw()
-    love.graphics.draw(self.batch, self.x-Camera.x, self.y-128-Camera.y, 0, self.zx, self.zy)
+    love.graphics.draw(self.batch, self.x-Camera.x, self.y-self.height*self.zy-Camera.y, 0, self.zx, self.zy)
+    love.graphics.rectangle("line", self.x-Camera.x, self.y-Camera.y, self.width*self.zx, self.height*self.zy)
 end
