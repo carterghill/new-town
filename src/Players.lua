@@ -50,3 +50,7 @@ function Players:keyreleased(key)
         player2.controls.right = false
     end
 end
+
+function Players:get()
+    return {player, player2}
+end

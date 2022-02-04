@@ -46,10 +46,27 @@ function TileObject:bakeObject()
 end
 
 function TileObject:update(dt)
-
+    local players = Players:get()
+    for i, player in ipairs(players) do
+        if self:checkCollision(player) then
+            print("Collision!")
+        else
+            print("No collision!")
+        end
+    end
 end
 
 function TileObject:draw()
     love.graphics.draw(self.batch, self.x-Camera.x, self.y-self.height*self.zy-Camera.y, 0, self.zx, self.zy)
     love.graphics.rectangle("line", self.x-Camera.x, self.y-Camera.y, self.width*self.zx, self.height*self.zy)
+end
+
+function TileObject:checkCollision(object)
+    if self.x < object.x+object.width
+    and self.x+self.width > object.x
+    and self.y < object.y+object.height
+    and self.y+self.height > object.y then
+        return true
+    end
+    return false
 end
