@@ -94,6 +94,17 @@ function Player:update(dt, level)
         self.vy = -self.topSpeed
     end
 
+    
+
+
+    if self.character ~= nil then
+        self.character:update(dt)
+    end
+
+    self:normalize()
+    self.x = self.x + self.dx*dt
+    self.y = self.y - self.dy*dt
+
     if level ~= nil then
         if self.x < 0 then
             self.x = 0
@@ -145,15 +156,6 @@ function Player:update(dt, level)
         end
 
     end
-
-
-    if self.character ~= nil then
-        self.character:update(dt)
-    end
-
-    self:normalize()
-    self.x = self.x + self.dx*dt
-    self.y = self.y - self.dy*dt
 
     if self.character ~= nil then
 

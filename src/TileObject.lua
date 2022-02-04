@@ -49,9 +49,9 @@ function TileObject:update(dt)
     local players = Players:get()
     for i, player in ipairs(players) do
         if self:checkCollision(player) then
-            print("Collision!")
+            --print("Collision!")
         else
-            print("No collision!")
+            --print("No collision!")
         end
     end
 end
@@ -63,9 +63,9 @@ end
 
 function TileObject:checkCollision(object)
     if self.x < object.x+object.width
-    and self.x+self.width > object.x
+    and self.x+self.width*self.zx > object.x
     and self.y < object.y+object.height
-    and self.y+self.height > object.y then
+    and self.y+self.height*self.zy > object.y then
         return true
     end
     return false
