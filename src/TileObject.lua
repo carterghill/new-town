@@ -34,7 +34,7 @@ end
 function TileObject:bakeObject()
     self.batch:clear()
     
-    if self.type == "TallGrass" then
+    if self.type == "TallGrass" or self.gid == 241 then
         self.batch:add(self.quads[self.gid-16], 0, 0)
         self.batch:add(self.quads[self.gid], 0, 128)
     else 
