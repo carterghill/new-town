@@ -6,6 +6,7 @@ TileObject = {
     zx = 1,
     zy = 1,
     type = "",
+    rotation = 1,
 }
 
 function TileObject:new(obj, tilemap)
@@ -41,11 +42,16 @@ function TileObject:bakeObject()
         self.batch:add(self.quads[self.gid], 0, 128)
     end
 
-
     self.batch:flush()
 end
 
 function TileObject:update(dt)
+    self.rotation = self.rotation + dt
+    local tau = math.pi*2
+    if (self.rotation > tau) then
+        self.rotation = self.rotation - tau
+    end
+    print(self.rotation)
     local players = Players:get()
     for i, player in ipairs(players) do
         if self:checkCollision(player) then
@@ -57,7 +63,7 @@ function TileObject:update(dt)
 end
 
 function TileObject:draw()
-    love.graphics.draw(self.batch, self.x-Camera.x, self.y-self.height*self.zy-Camera.y, 0, self.zx, self.zy)
+    love.graphics.draw(self.batch, self.x-Camera.x+32, (self.y-self.height*self.zy-Camera.y)+128, self.rotation, self.zx, self.zy, 64, 128*2)
     love.graphics.rectangle("line", self.x-Camera.x, self.y-Camera.y, self.width*self.zx, self.height*self.zy)
 end
 
