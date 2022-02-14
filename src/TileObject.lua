@@ -6,7 +6,8 @@ TileObject = {
     zx = 1,
     zy = 1,
     type = "",
-    rotation = 1,
+    rotation = 0,
+    rotateTo = 0.3
 }
 
 function TileObject:new(obj, tilemap)
@@ -46,20 +47,57 @@ function TileObject:bakeObject()
 end
 
 function TileObject:update(dt)
-    self.rotation = self.rotation + dt
-    local tau = math.pi*2
-    if (self.rotation > tau) then
-        self.rotation = self.rotation - tau
-    end
-    print(self.rotation)
     local players = Players:get()
     for i, player in ipairs(players) do
         if self:checkCollision(player) then
             --print("Collision!")
+            if self.rotateTo == 0 and self.rotation == 0 and (player.dx ~= 0 or player.dy ~= 0) then
+                self.rotateTo = 0.3
+            end
         else
             --print("No collision!")
         end
     end
+    self:animate(dt)
+end
+
+function TileObject:animate(dt)
+    local tau = math.pi*2
+    if (self.rotation > tau) then
+        self.rotation = self.rotation - tau
+    end
+    if self.rotateTo == 0.3 then
+        if self.rotation < 0.3 then
+            self.rotation = self.rotation + dt
+        else
+            self.rotation = self.rotation - dt
+            self.rotateTo = -0.2
+        end
+    end
+    if self.rotateTo == -0.2 then
+        if self.rotation > -0.2 then
+            self.rotation = self.rotation - dt
+        else
+            self.rotation = self.rotation + dt
+            self.rotateTo = 0.1
+        end
+    end
+    if self.rotateTo == 0.1 then
+        if self.rotation < 0.1 then
+            self.rotation = self.rotation + dt
+        else
+            self.rotation = self.rotation - dt
+            self.rotateTo = 0
+        end
+    end
+    if self.rotateTo == 0 then
+        if self.rotation > 0 then
+            self.rotation = self.rotation - dt
+        else
+            self.rotation = 0
+        end
+    end
+    print(self.rotation)
 end
 
 function TileObject:draw()
