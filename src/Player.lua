@@ -159,7 +159,7 @@ function Player:update(dt, level)
 
     if self.character ~= nil then
 
-        if self.dx > 0 and self.dx > math.abs(self.dy) then
+        --[[if self.dx > 0 and self.dx > math.abs(self.dy) then
             self.character:setDirection("Right")
         elseif self.dx < 0 and self.dx < math.abs(self.dy) then
             self.character:setDirection("Left")
@@ -167,7 +167,7 @@ function Player:update(dt, level)
             self.character:setDirection("Front")
         elseif self.dy > 0 and self.dy > math.abs(self.dx) then
             self.character:setDirection("Back")
-        end
+        end--]]
 
         if math.abs(self.dx) < 100 and math.abs(self.dy) < 100 then
             self.character:setState("Idle")
@@ -210,15 +210,19 @@ function Player:keypressed(key)
     local keyboard = self.input.keyboard
     if key == keyboard.up then
         self.controls.up = true
+        self.character:setDirection("Back")
     end
     if key == keyboard.down then
         self.controls.down = true
+        self.character:setDirection("Front")
     end
     if key == keyboard.left then
         self.controls.left = true
+        self.character:setDirection("Left")
     end
     if key == keyboard.right then
         self.controls.right = true
+        self.character:setDirection("Right")
     end
 end
 
