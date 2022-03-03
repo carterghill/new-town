@@ -32,9 +32,6 @@ end
 function Player:update(dt, level)
     
     if self.controls.up then
-        --if self.character ~= nil and self.vy > 0 then
-        --    self.character:setDirection("Back")
-        --end
         self.vy = self.vy + self.accel*dt
     elseif self.vy > 0 then
         if self.vy < self.friction*dt then
@@ -45,9 +42,6 @@ function Player:update(dt, level)
     end
 
     if self.controls.down then
-        --if self.character ~= nil and self.vy < 0 then
-         --   self.character:setDirection("Front")
-        --end
         self.vy = self.vy - self.accel*dt
     elseif self.vy < 0 then
         if self.vy > -self.friction*dt then
@@ -59,9 +53,6 @@ function Player:update(dt, level)
 
     if self.controls.left then
         self.vx = self.vx - self.accel*dt
-        --if self.character ~= nil and self.vx < 0 and math.abs(self.vy) < 0.01 then
-        --    self.character:setDirection("Left")
-        --end
     elseif self.vx < 0 then
         if self.vx > -self.friction*dt then
             self.vx = 0
@@ -71,9 +62,6 @@ function Player:update(dt, level)
     end
 
     if self.controls.right then
-       -- if self.character ~= nil and self.vx > 0 and math.abs(self.vy) < 0.01 then
-       --     self.character:setDirection("Right")
-       -- end
         self.vx = self.vx + self.accel*dt
     elseif self.vx > 0 then
         if self.dx < self.friction*dt then
@@ -93,9 +81,6 @@ function Player:update(dt, level)
     elseif self.vy < -self.topSpeed then
         self.vy = -self.topSpeed
     end
-
-    
-
 
     if self.character ~= nil then
         self.character:update(dt)
@@ -159,16 +144,6 @@ function Player:update(dt, level)
 
     if self.character ~= nil then
 
-        --[[if self.dx > 0 and self.dx > math.abs(self.dy) then
-            self.character:setDirection("Right")
-        elseif self.dx < 0 and self.dx < math.abs(self.dy) then
-            self.character:setDirection("Left")
-        elseif self.dy < 0 and self.dy < math.abs(self.dx) then
-            self.character:setDirection("Front")
-        elseif self.dy > 0 and self.dy > math.abs(self.dx) then
-            self.character:setDirection("Back")
-        end--]]
-
         if math.abs(self.dx) < 100 and math.abs(self.dy) < 100 then
             self.character:setState("Idle")
         else
@@ -210,34 +185,55 @@ function Player:keypressed(key)
     local keyboard = self.input.keyboard
     if key == keyboard.up then
         self.controls.up = true
-        self.character:setDirection("Back")
+        if not self.controls.down then
+            self.character:setDirection("Back")
+        end
     end
     if key == keyboard.down then
         self.controls.down = true
-        self.character:setDirection("Front")
+        if not self.controls.up then
+            self.character:setDirection("Front")
+        end
     end
     if key == keyboard.left then
         self.controls.left = true
-        self.character:setDirection("Left")
+        if not self.controls.right then
+            self.character:setDirection("Left")
+        end
     end
     if key == keyboard.right then
         self.controls.right = true
-        self.character:setDirection("Right")
+        if not self.controls.left then
+            self.character:setDirection("Right")
+        end
     end
 end
 
 function Player:keyreleased(key)
+    print(key)
     local keyboard = self.input.keyboard
     if key == keyboard.up then
         self.controls.up = false
+        if self.controls.down then
+            self.character:setDirection("Front")
+        end
     end
     if key == keyboard.down then
         self.controls.down = false
+        if self.controls.up then
+            self.character:setDirection("Back")
+        end
     end
     if key == keyboard.left then
         self.controls.left = false
+        if self.controls.right then
+            self.character:setDirection("Right")
+        end
     end
     if key == keyboard.right then
         self.controls.right = false
+        if self.controls.left then
+            self.character:setDirection("Left")
+        end
     end
 end

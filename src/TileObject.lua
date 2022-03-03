@@ -97,12 +97,11 @@ function TileObject:animate(dt)
             self.rotation = 0
         end
     end
-    print(self.rotation)
 end
 
 function TileObject:draw()
     love.graphics.draw(self.batch, self.x-Camera.x+32, (self.y-self.height*self.zy-Camera.y)+128, self.rotation, self.zx, self.zy, 64, 128*2)
-    love.graphics.rectangle("line", self.x-Camera.x, self.y-Camera.y, self.width*self.zx, self.height*self.zy)
+    --love.graphics.rectangle("line", self.x-Camera.x, self.y-Camera.y, self.width*self.zx, self.height*self.zy)
 end
 
 function TileObject:checkCollision(object)
